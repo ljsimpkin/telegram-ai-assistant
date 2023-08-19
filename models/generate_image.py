@@ -22,7 +22,6 @@ def text_to_image(text):
   })
 
 async def generate_image(update, context):
-    print("\n\n\ngenerating image\n\n\n")
     # Generate an image from the text
     text = ' '.join(context.args)
     # import pdb; pdb.set_trace()
