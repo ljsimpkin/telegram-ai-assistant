@@ -3,6 +3,7 @@ import os
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
 from env import TELEGRAM_TOKEN
 from commands.start import start
+from commands.image import image
 from commands.echo import echo
 from commands.caps import caps
 from commands.voice_handler import voice_handler
@@ -28,6 +29,9 @@ if __name__ == '__main__':
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
+
+    image_handler = CommandHandler('image', image)
+    application.add_handler(image_handler)
 
     voice_message_handler = MessageHandler(filters.VOICE, voice_handler)
     application.add_handler(voice_message_handler)
