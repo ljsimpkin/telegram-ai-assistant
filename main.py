@@ -8,6 +8,7 @@ from commands.echo import echo
 from commands.caps import caps
 from commands.voice_handler import voice_handler
 from commands.unknown import unknown
+from commands.summarize_url import summarize_url
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -31,6 +32,9 @@ if __name__ == '__main__':
     application.add_handler(start_handler)
 
     image_handler = CommandHandler('img', image)
+    application.add_handler(image_handler)
+
+    image_handler = CommandHandler('url', summarize_url)
     application.add_handler(image_handler)
 
     voice_message_handler = MessageHandler(filters.VOICE, voice_handler)
