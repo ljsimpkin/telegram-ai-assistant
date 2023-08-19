@@ -1,4 +1,4 @@
-# Project Title
+# Telegram AI Assistant
 
 This is a simple Telegram bot built with Python.
 
@@ -20,7 +20,10 @@ git clone <repository_url>
 ```
 pip install -r requirements.txt
 ```
-3. Run the bot
+3. Update your env.py file with your token
+You can find your token by craeting a new bot with [BotFather](https://t.me/botfather)
+
+4. Run the bot
 ```
 python main.py
 ```
@@ -28,7 +31,12 @@ python main.py
 ## Built With
 
 * [Python](https://www.python.org/) - The programming language used
-* [Telegram](https://core.telegram.org/bots/api) - The bot API used
+* [Telegram](https://github.com/python-telegram-bot/python-telegram-bot) - The bot API used
+
+## Resources
+* [Getting started tutorial](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Introduction-to-the-API) - simple quick start with the python library
+* [Example project tutorial](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions---Your-first-Bot) - simple project
+
 
 ## Authors
 
