@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-API_URL = "https://api-inference.huggingface.co/models/openai/whisper-tiny"
+API_URL = "https://api-inference.huggingface.co/models/openai/whisper-base"
 headers = {"Authorization": HUGGING_FACE_TOKEN}
 
 def query(filename):
@@ -27,6 +27,8 @@ if not os.path.exists('voice_messages'):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # upload and send an image
     await context.bot.send_document(chat_id=update.effective_chat.id, document='test.png')
+    # upload an audio file
+    await context.bot.send_document(chat_id=update.effective_chat.id, document='./voice_messages/voice_message.ogg')
     # send a url image
     await context.bot.send_document(chat_id=update.effective_chat.id, document='https://python-telegram-bot.org/static/testfiles/telegram.gif')
     # respond with a text
@@ -52,7 +54,6 @@ async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         text=output["text"]
     )
-
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
