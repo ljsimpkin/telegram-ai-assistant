@@ -1,6 +1,6 @@
 import os
 from .common import Update, ContextTypes
-from models.hugging_face import summarise_audio
+from models.summarise_audio import summarise_audio
 
 async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = await summarise_audio(update, context)
