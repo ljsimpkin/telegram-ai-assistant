@@ -1,4 +1,4 @@
-from models.summarise_text import summariseText
+from summarise_text import summariseText
 
 def test_summarise_text_is_true():
     output = summariseText({
