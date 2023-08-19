@@ -62,3 +62,4 @@ Use chunking to increase audio transciprtion length greater than 30s for whisper
 Locally run api server to have files greater than 20 mbs
 Enable bot to be used in group chats eg to transcribe audio for users who dont like voice messages
 Make the logger save to a file
+Send a mark down message as response
