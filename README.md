@@ -45,3 +45,18 @@ python main.py
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+## Notes
+
+## Pyhton debugging tool
+
+```
+import pdb; pdb.set_trace()
+```
+
+## To Do
+
+Speed up program by skipping download audio file
+Use chunking to increase audio transciprtion length greater than 30s for whisper
+Locally run api server to have files greater than 20 mbs
