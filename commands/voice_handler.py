@@ -27,4 +27,4 @@ async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Generate an image from the transcription
     text_to_image(output["text"])
     # respond with the generated image
-    await context.bot.send_document(chat_id=update.effective_chat.id, document='./images/output_image.jpg')
+    await context.bot.send_document(chat_id=update.effective_chat.id, document='./downloads/output_image.jpg')
