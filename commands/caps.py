@@ -1,5 +1,4 @@
-from telegram import Update
-from telegram.ext import ContextTypes
+from .common import Update, ContextTypes
 
 async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text_caps = ' '.join(context.args).upper()
