@@ -13,9 +13,9 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-# Create a directory for voice messages if it doesn't exist
-if not os.path.exists('voice_messages'):
-    os.makedirs('voice_messages')
+# Create a directory for downloads if it doesn't exist
+if not os.path.exists('downloads'):
+    os.makedirs('downloads')
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
