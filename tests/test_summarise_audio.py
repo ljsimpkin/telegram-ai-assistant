@@ -19,3 +19,6 @@ def test_summarise_audio(mock_query):
     
     # Assert that the result is a string (text)
     assert isinstance(result, str)
+
+def test_true_is_true():
+    assert True is True
