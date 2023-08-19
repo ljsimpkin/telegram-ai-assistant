@@ -30,7 +30,7 @@ if __name__ == '__main__':
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
-    image_handler = CommandHandler('image', image)
+    image_handler = CommandHandler('img', image)
     application.add_handler(image_handler)
 
     voice_message_handler = MessageHandler(filters.VOICE, voice_handler)
