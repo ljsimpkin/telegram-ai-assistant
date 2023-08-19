@@ -1,4 +1,5 @@
 import logging
+import os
 from telegram import Update, InputTextMessageContent
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
 
@@ -7,6 +8,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
+
+# Create a directory for voice messages if it doesn't exist
+if not os.path.exists('voice_messages'):
+    os.makedirs('voice_messages')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -20,6 +25,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text_caps = ' '.join(context.args).upper()
     await context.bot.send_message(chat_id=update.effective_chat.id, text=text_caps)
+
+async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    file_id = update.message.voice.file_id
+    new_file = context.bot.get_file(file_id)
+    new_file.download('voice_messages/voice_message.ogg')
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
@@ -37,6 +47,9 @@ if __name__ == '__main__':
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
+
+    voice_message_handler = MessageHandler(filters.VOICE, voice_handler)
+    application.add_handler(voice_message_handler)
 
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
