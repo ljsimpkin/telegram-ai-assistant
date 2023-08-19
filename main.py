@@ -14,6 +14,11 @@ if not os.path.exists('voice_messages'):
     os.makedirs('voice_messages')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # upload and send an image
+    await context.bot.send_document(chat_id=update.effective_chat.id, document='test.png')
+    # send a url image
+    await context.bot.send_document(chat_id=update.effective_chat.id, document='https://python-telegram-bot.org/static/testfiles/telegram.gif')
+    # respond with a text
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="I'm a bot, please talk to me!"
@@ -29,7 +34,7 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     file_id = update.message.voice.file_id
     new_file = await context.bot.get_file(file_id)
-    await download(new_file.file_path, 'voice_messages/voice_message.ogg')
+    await new_file.download_to_drive('voice_messages/voice_message.ogg')
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
