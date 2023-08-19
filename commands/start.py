@@ -1,5 +1,6 @@
 import os
-from .common import Update, ContextTypes
+from telegram import Update
+from telegram.ext import ContextTypes
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # upload and send an image

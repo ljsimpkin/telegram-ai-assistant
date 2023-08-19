@@ -1,5 +1,6 @@
 import os
-from .common import Update, ContextTypes
+from telegram import Update
+from telegram.ext import ContextTypes
 from models.hugging_face import query, get_image
 
 def save_image(image_bytes, filename):
