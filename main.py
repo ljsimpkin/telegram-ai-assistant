@@ -28,8 +28,8 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def voice_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     file_id = update.message.voice.file_id
-    new_file = context.bot.get_file(file_id)
-    new_file.download('voice_messages/voice_message.ogg')
+    new_file = await context.bot.get_file(file_id)
+    await new_file.download('voice_messages/voice_message.ogg')
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
