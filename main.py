@@ -15,8 +15,9 @@ def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(update.message.text)
 
 def main() -> None:
+    from env import TOKEN
     """Start the bot."""
-    updater = Updater("TOKEN", use_context=True)
+    updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
 
