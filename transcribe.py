@@ -28,6 +28,10 @@ image_bytes = query({
 })
 
 # You can access the image with PIL.Image for example
-import io
-from PIL import Image
-image = Image.open(io.BytesIO(image_bytes))
+import os
+def save_image(image_bytes, filename):
+    with open(filename, 'wb') as f:
+        f.write(image_bytes)
+
+# Save the image to the local directory
+save_image(image_bytes, os.path.join(os.getcwd(), 'output_image.jpg'))
