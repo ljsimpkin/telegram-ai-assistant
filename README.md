@@ -46,6 +46,9 @@ python main.py
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
+## Screenshot
+
+![Screenshot](assets/screen-shot.PNG)
 
 ## Notes
 
