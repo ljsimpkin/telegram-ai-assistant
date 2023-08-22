@@ -21,6 +21,8 @@ import re
 def clean_text(text):
     text = re.sub(r'\n+', '\n', text)  # remove multiple new lines
     text = re.sub(r'\[\d+\]', '', text)  # remove references like [1], [2], etc.
+    text = re.sub(r'\t', '', text)  # remove tabs
+    text = re.sub(r'  ', ' ', text)  # replace double spaces with single space
     return text.strip()  # remove leading and trailing whitespace
 
 def get_readable(url):
