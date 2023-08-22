@@ -16,12 +16,19 @@ def parse_html_to_text(html):
     return soup.get_text()
 
 
+import re
+
+def clean_text(text):
+    text = re.sub(r'\n+', '\n', text)  # remove multiple new lines
+    text = re.sub(r'\[\d+\]', '', text)  # remove references like [1], [2], etc.
+    return text.strip()  # remove leading and trailing whitespace
+
 def get_readable(url):
   response = requests.get(url)
   doc = Document(response.content)
   doc.title()
   summary_html = doc.summary()
-  return parse_html_to_text(summary_html)
+  return clean_text(parse_html_to_text(summary_html))
 
 # url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
 url = "https://en.wikipedia.org/wiki/New_Zealand"
