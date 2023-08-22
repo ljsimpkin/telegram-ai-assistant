@@ -19,5 +19,5 @@ def get_readable(url):
   doc.title()
   return doc.summary()
 
-# url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
-# print (get_readable(url))
+url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
+print (get_readable(url))
