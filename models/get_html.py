@@ -13,7 +13,7 @@ def get_static_website(url):
 
 def parse_html_to_text(html):
     soup = BeautifulSoup(html, 'html.parser')
-    return soup.get_text('\n')
+    return soup.get_text()
 
 
 def get_readable(url):
@@ -23,5 +23,6 @@ def get_readable(url):
   summary_html = doc.summary()
   return parse_html_to_text(summary_html)
 
-url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
+# url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
+url = "https://en.wikipedia.org/wiki/New_Zealand"
 print (get_readable(url))
