@@ -3,3 +3,4 @@ env.py
 __pycache__
 output_image.jpg
 downloads/*
+.DS_Store
