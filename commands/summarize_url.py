@@ -1,6 +1,6 @@
 from .common import Update, ContextTypes
 from models.summarize_gpt import summarize_text
-from models.get_html import get_readable
+from models.get_article import get_readable
 
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     URL = update.message.text
