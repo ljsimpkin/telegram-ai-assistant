@@ -34,8 +34,6 @@ def get_readable(url):
 
 # url = "https://edition.cnn.com/2023/08/21/travel/jetzero-blended-wing-plane-climate-spc/index.html"
 # url = "https://en.wikipedia.org/wiki/New_Zealand"
-url = "https://www.technologyreview.com/2023/08/18/1077537/menstruation-mystery/"
+# url = "https://www.technologyreview.com/2023/08/18/1077537/menstruation-mystery/"
+# url = "https://www.economist.com/finance-and-economics/2023/08/24/chinas-economy-is-in-desperate-need-of-rescue"
 # print (get_readable(url))
-
-# import html2text
-# print (html2text.html2text(url))

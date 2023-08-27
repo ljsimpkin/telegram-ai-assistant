@@ -1,5 +1,6 @@
 import logging
 import os
+from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
 from env import TELEGRAM_TOKEN
 from commands.start import start
@@ -22,7 +23,7 @@ if not os.path.exists('downloads'):
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
+    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), summarize_url)
     application.add_handler(echo_handler)
     
     caps_handler = CommandHandler('caps', caps)
