@@ -23,11 +23,24 @@ if not os.path.exists('downloads'):
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), summarize_url)
+    from commands.history import history
+
+    state = {}
+
+    def store_message(update: Update, context: ContextTypes.Context):
+        chat_id = update.effective_chat.id
+        if chat_id not in state:
+            state[chat_id] = []
+        state[chat_id].append(update.message.text)
+
+    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), store_message)
     application.add_handler(echo_handler)
     
     caps_handler = CommandHandler('caps', caps)
     application.add_handler(caps_handler)
+
+    history_handler = CommandHandler('history', history)
+    application.add_handler(history_handler)
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
