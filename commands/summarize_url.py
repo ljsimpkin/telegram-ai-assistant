@@ -6,5 +6,12 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     URL = update.message.text
     page = get_readable(URL)
     summary = summarize_text(page)
-    summary = "Summary: " + summary
     await context.bot.send_message(chat_id=update.effective_chat.id, text=summary)
+    i = 0
+    # message back the source of the summarization
+    while i < len(page):
+      await context.bot.send_message(chat_id=update.effective_chat.id, text=page[i:i+3000])
+      i += 3000
+        
+
+    

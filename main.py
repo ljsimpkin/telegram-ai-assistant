@@ -33,8 +33,8 @@ if __name__ == '__main__':
     #         state[chat_id] = []
     #     state[chat_id].append(update.message.text)
 
-    # echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), store_message)
-    # application.add_handler(echo_handler)
+    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), summarize_url)
+    application.add_handler(echo_handler)
     
     caps_handler = CommandHandler('caps', caps)
     application.add_handler(caps_handler)
