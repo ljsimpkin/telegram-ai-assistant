@@ -27,14 +27,14 @@ if __name__ == '__main__':
 
     state = {}
 
-    def store_message(update: Update, context: ContextTypes.Context):
-        chat_id = update.effective_chat.id
-        if chat_id not in state:
-            state[chat_id] = []
-        state[chat_id].append(update.message.text)
+    # def store_message(update: Update, context: ContextTypes.Context):
+    #     chat_id = update.effective_chat.id
+    #     if chat_id not in state:
+    #         state[chat_id] = []
+    #     state[chat_id].append(update.message.text)
 
-    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), store_message)
-    application.add_handler(echo_handler)
+    # echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), store_message)
+    # application.add_handler(echo_handler)
     
     caps_handler = CommandHandler('caps', caps)
     application.add_handler(caps_handler)
