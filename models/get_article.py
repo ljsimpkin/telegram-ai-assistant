@@ -36,4 +36,5 @@ def get_readable(url):
 # url = "https://en.wikipedia.org/wiki/New_Zealand"
 # url = "https://www.technologyreview.com/2023/08/18/1077537/menstruation-mystery/"
 # url = "https://www.economist.com/finance-and-economics/2023/08/24/chinas-economy-is-in-desperate-need-of-rescue"
-# print (get_readable(url))
+url = "https://www.technologyreview.com/2023/08/18/1077548/computer-waste-heat/"
+print (get_readable(url))
