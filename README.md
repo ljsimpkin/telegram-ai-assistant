@@ -60,13 +60,13 @@ import pdb; pdb.set_trace()
 
 ## To Do
 
-– compile websites with javascript
+- compile websites with javascript
 - Send a mark down message as response
-– allow the questioning of article summarisation
+- allow the questioning of article summarisation
 - refactor article check into a 'see more' button
 - improves article transcript based on user feedback
 - Speed up program by skipping download audio file
-– write tests using test driven development
+- write tests using test driven development
 - Enable bot to be used in group chats eg to transcribe audio for users who dont like voice messages
 - Make the logger save to a file
 - Use chunking to increase audio transciprtion length greater than 30s for whisper
