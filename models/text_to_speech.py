@@ -9,5 +9,12 @@ response = client.audio.speech.create(
   input="Today is a wonderful day to build something people love!"
 )
 
-response.stream_to_file(speech_file_path)
+# response.stream_to_file(speech_file_path)
 
+
+def text_to_speech_fun(text):
+	print(text)
+
+
+print("starting programme")
+# text_to_speech("hello")

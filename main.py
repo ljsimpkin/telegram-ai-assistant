@@ -2,9 +2,10 @@ import logging
 import os
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
-from env import TELEGRAM_TOKEN
+from env import TELEGRAM_UAT_TOKEN
 from commands.start import start
 from commands.image import image
+from commands.text_to_speech_handler import text_to_speech_handler
 from commands.echo import echo
 from commands.caps import caps
 from commands.voice_handler import voice_handler
@@ -21,7 +22,7 @@ if not os.path.exists('downloads'):
     os.makedirs('downloads')
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    application = ApplicationBuilder().token(TELEGRAM_UAT_TOKEN).build()
 
     from commands.history import history
 
@@ -47,6 +48,9 @@ if __name__ == '__main__':
 
     image_handler = CommandHandler('img', image)
     application.add_handler(image_handler)
+    
+    text_to_speech_handler_main = CommandHandler('say', text_to_speech_handler)
+    application.add_handler(text_to_speech_handler_main)
 
     image_handler = CommandHandler('url', summarize_url)
     application.add_handler(image_handler)
