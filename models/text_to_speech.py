@@ -2,19 +2,18 @@ from pathlib import Path
 from openai import OpenAI
 client = OpenAI()
 
-speech_file_path = Path(__file__).parent / "speech.mp3"
-response = client.audio.speech.create(
-  model="tts-1",
-  voice="alloy",
-  input="Today is a wonderful day to build something people love!"
-)
-
-# response.stream_to_file(speech_file_path)
 
 
-def text_to_speech_fun(text):
+async def text_to_speech(text):
 	print(text)
+	
+	speech_file_path = Path(__file__).parent / "speech.mp3"
+	response = client.audio.speech.create(
+  	model="tts-1",
+  	voice="alloy",
+  	input=text
+	)
 
+	return response.stream_to_file(speech_file_path)
 
-print("starting programme")
-# text_to_speech("hello")
+#text_to_speech("this is a new string")
