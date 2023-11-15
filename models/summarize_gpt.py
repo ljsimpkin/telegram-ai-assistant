@@ -1,5 +1,6 @@
-import requests
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 
 # MODEL="gpt-3.5-turbo"
 MODEL="gpt-4"
@@ -13,16 +14,16 @@ def setup_openai():
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("Please set the OPENAI_API_KEY environmental variable.")
-    openai.api_key = api_key
+    client.api_key = api_key
 
 def interact_with_gpt(messages):
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=MODEL,
         messages=messages,
         temperature=TEMPERATURE,
         max_tokens=MAX_TOKENS,
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content
 
 def sentence_count(string):
     return len(string.split('.')) 
