@@ -66,3 +66,5 @@ import pdb; pdb.set_trace()
 - Enable bot to be used in group chats eg to transcribe audio for users who dont like voice messages
 - Make the logger save to a file
 - Send a mark down message as response
+- summarize youtube videos
+
