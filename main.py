@@ -2,7 +2,7 @@ import logging
 import os
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
-from env import TELEGRAM_UAT_TOKEN
+from env import TELEGRAM_TOKEN
 from commands.start import start
 from commands.image import image
 from commands.say import say
@@ -23,7 +23,7 @@ if not os.path.exists('downloads'):
     os.makedirs('downloads')
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(TELEGRAM_UAT_TOKEN).build()
+    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
     from commands.history import history
 
