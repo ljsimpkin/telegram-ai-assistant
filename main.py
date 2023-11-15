@@ -11,6 +11,7 @@ from commands.caps import caps
 from commands.voice_handler import voice_handler
 from commands.unknown import unknown
 from commands.summarize_url import summarize_url
+from commands.handle_input_text import handle_input_text
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -34,8 +35,9 @@ if __name__ == '__main__':
     #         state[chat_id] = []
     #     state[chat_id].append(update.message.text)
 
-    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), summarize_url)
-    application.add_handler(echo_handler)
+    # Handles all incoming plain text and triggers respective services
+    text_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_input_text)
+    application.add_handler(text_handler)
     
     caps_handler = CommandHandler('caps', caps)
     application.add_handler(caps_handler)
