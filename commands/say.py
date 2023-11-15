@@ -2,7 +2,8 @@ import os
 from .common import Update, ContextTypes
 from models.text_to_speech import text_to_speech
 
-async def text_to_speech_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# this command generates an audio message based on user input
+async def say(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = ' '.join(context.args)
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
