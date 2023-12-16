@@ -43,7 +43,10 @@ if __name__ == '__main__':
         if "message" not in state[chat_id]:
             state[chat_id]["message"] = []
 
-        state[chat_id]["message"].append({"role": "user", "content": update.message.text})
+        # Remove "/gpt" from the message text
+        message_text = update.message.text.replace("/gpt", "").strip()
+
+        state[chat_id]["message"].append({"role": "user", "content": message_text})
 
         response = await gpt_start(state[chat_id])
         await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
