@@ -57,8 +57,6 @@ if __name__ == '__main__':
 
     gpt_handler = CommandHandler('gpt', gpt_command)
     application.add_handler(gpt_handler)
-    application.user_data = {**application.user_data, 'state': state}
-    application.add_handler(gpt_handler)
 
     # Handles all incoming plain text and triggers respective services
     text_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_input_text)
