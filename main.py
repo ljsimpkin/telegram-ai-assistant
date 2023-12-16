@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     state = {}
     async def get_state(update: Update, context: ContextTypes.context):
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(context.user_data['state'])))
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(context.user_data)))
     
     # async def gpt(update: Update, context: ContextTypes.context):
     #     chat_id = update.effective_chat.id
