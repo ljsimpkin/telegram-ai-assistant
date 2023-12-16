@@ -55,7 +55,9 @@ if __name__ == '__main__':
     state_handler = CommandHandler('state', get_state)
     application.add_handler(state_handler)
 
-    gpt_handler = CommandHandler('gpt', gpt_command(state))
+    gpt_handler = CommandHandler('gpt', gpt_command)
+    application.add_handler(gpt_handler)
+    application.user_data['state'] = state
     application.add_handler(gpt_handler)
 
     # Handles all incoming plain text and triggers respective services
