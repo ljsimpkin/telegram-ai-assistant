@@ -36,16 +36,14 @@ def interact_with_gpt(messages):
     )
     return response.choices[0].message.content
 
-async def gpt_start(message_state):
+async def gpt_start(state):
     setup_openai()
-    conversation = message_state
+    conversation = state["message"]
     # history = InMemoryHistory()
-
-    # user_input = prompt("You: ", history=history)
-    # conversation.append({"role": "user", "content": user_input})
+    
     response = interact_with_gpt(messages=conversation)
     conversation.append({"role": "assistant", "content": response})
     print(Fore.YELLOW + "ChatGPT: " + response)
     
-    message_state = conversation
+    state["message"] = conversation
     return response
