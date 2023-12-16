@@ -14,6 +14,7 @@ from commands.unknown import unknown
 from commands.summarize_url import summarize_url
 from commands.handle_input_text import handle_input_text
 
+from commands.gpt import gpt_command
 from models.gpt_conversation import gpt_start
 
 logging.basicConfig(
@@ -33,29 +34,28 @@ if __name__ == '__main__':
     state = {}
     async def get_state(update: Update, context: ContextTypes.context):
         await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(state)))
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(update)))
     
-    async def gpt(update: Update, context: ContextTypes.context):
-        chat_id = update.effective_chat.id
-        if chat_id not in state:
-            state[chat_id] = {}
+    # async def gpt(update: Update, context: ContextTypes.context):
+    #     chat_id = update.effective_chat.id
+    #     if chat_id not in state:
+    #         state[chat_id] = {}
 
-        if "message" not in state[chat_id]:
-            state[chat_id]["message"] = []
+    #     if "message" not in state[chat_id]:
+    #         state[chat_id]["message"] = []
 
-        # Remove the first word from the message text
-        message_text = ' '.join(update.message.text.split()[1:])
+    #     # Remove the command from the message text e.g. /gpt
+    #     message_text = ' '.join(update.message.text.split()[1:])
 
-        state[chat_id]["message"].append({"role": "user", "content": message_text})
+    #     state[chat_id]["message"].append({"role": "user", "content": message_text})
 
-        response = await gpt_start(state[chat_id])
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
+    #     response = await gpt_start(state[chat_id])
+    #     await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
     
-    # st returns the current user's state
-    state_handler = CommandHandler('st', get_state)
+    # state returns the state object
+    state_handler = CommandHandler('state', get_state)
     application.add_handler(state_handler)
 
-    gpt_handler = CommandHandler('gpt', gpt)
+    gpt_handler = CommandHandler('gpt', gpt_command(state))
     application.add_handler(gpt_handler)
 
     # Handles all incoming plain text and triggers respective services
