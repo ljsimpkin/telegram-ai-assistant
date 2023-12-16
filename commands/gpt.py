@@ -1,7 +1,8 @@
 from .common import Update, ContextTypes
 from models.gpt_conversation import gpt_start
 
-async def gpt_command(update: Update, context: ContextTypes.context, state):
+async def gpt_command(update: Update, context: ContextTypes.context):
+    state = context.user_data['state']
         chat_id = update.effective_chat.id
         if chat_id not in state:
             state[chat_id] = {}
