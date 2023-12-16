@@ -13,6 +13,8 @@ from commands.unknown import unknown
 from commands.summarize_url import summarize_url
 from commands.handle_input_text import handle_input_text
 
+from models.gpt_conversation import gpt_start
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -28,12 +30,29 @@ if __name__ == '__main__':
     from commands.history import history
 
     state = {}
+    import json
+    async def store_message(update: Update, context: ContextTypes.context):
+        chat_id = update.effective_chat.id
+        if chat_id not in state:
+            state[chat_id] = []
+        state[chat_id].append(update.message.text)
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=''.join(json.dumps(state[chat_id])))
+    
+    async def gpt(update: Update, context: ContextTypes.context):
+        chat_id = update.effective_chat.id
+        if chat_id not in state:
+            state[chat_id] = []
 
-    # def store_message(update: Update, context: ContextTypes.Context):
-    #     chat_id = update.effective_chat.id
-    #     if chat_id not in state:
-    #         state[chat_id] = []
-    #     state[chat_id].append(update.message.text)
+        state[chat_id].append({"role": "user", "content": update.message.text})
+
+        response = await gpt_start(state[chat_id])
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
+    
+    hi_handler = CommandHandler('hi', store_message)
+    application.add_handler(hi_handler)
+
+    gpt_handler = CommandHandler('gpt', gpt)
+    application.add_handler(gpt_handler)
 
     # Handles all incoming plain text and triggers respective services
     text_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_input_text)
