@@ -43,8 +43,8 @@ if __name__ == '__main__':
         if "message" not in state[chat_id]:
             state[chat_id]["message"] = []
 
-        # Remove "/gpt" from the message text
-        message_text = update.message.text.replace("/gpt", "").strip()
+        # Remove the first word from the message text
+        message_text = ' '.join(update.message.text.split()[1:])
 
         state[chat_id]["message"].append({"role": "user", "content": message_text})
 
