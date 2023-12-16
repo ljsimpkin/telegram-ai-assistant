@@ -1,4 +1,5 @@
 import logging
+import json
 import os
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
@@ -30,26 +31,26 @@ if __name__ == '__main__':
     from commands.history import history
 
     state = {}
-    import json
-    async def store_message(update: Update, context: ContextTypes.context):
-        chat_id = update.effective_chat.id
-        if chat_id not in state:
-            state[chat_id] = []
-        state[chat_id].append(update.message.text)
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=''.join(json.dumps(state[chat_id])))
+    async def get_state(update: Update, context: ContextTypes.context):
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(state)))
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(update)))
     
     async def gpt(update: Update, context: ContextTypes.context):
         chat_id = update.effective_chat.id
         if chat_id not in state:
-            state[chat_id] = []
+            state[chat_id] = {}
 
-        state[chat_id].append({"role": "user", "content": update.message.text})
+        if "message" not in state[chat_id]:
+            state[chat_id]["message"] = []
+
+        state[chat_id]["message"].append({"role": "user", "content": update.message.text})
 
         response = await gpt_start(state[chat_id])
         await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
     
-    hi_handler = CommandHandler('hi', store_message)
-    application.add_handler(hi_handler)
+    # st returns the current user's state
+    state_handler = CommandHandler('st', get_state)
+    application.add_handler(state_handler)
 
     gpt_handler = CommandHandler('gpt', gpt)
     application.add_handler(gpt_handler)
