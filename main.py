@@ -13,9 +13,7 @@ from commands.voice_handler import voice_handler
 from commands.unknown import unknown
 from commands.summarize_url import summarize_url
 from commands.handle_input_text import handle_input_text
-
 from commands.gpt import gpt_command
-from models.gpt_conversation import gpt_start
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -29,27 +27,8 @@ if not os.path.exists('downloads'):
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    from commands.history import history
-
-    state = {}
     async def get_state(update: Update, context: ContextTypes.context):
         await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(context.user_data)))
-    
-    # async def gpt(update: Update, context: ContextTypes.context):
-    #     chat_id = update.effective_chat.id
-    #     if chat_id not in state:
-    #         state[chat_id] = {}
-
-    #     if "message" not in state[chat_id]:
-    #         state[chat_id]["message"] = []
-
-    #     # Remove the command from the message text e.g. /gpt
-    #     message_text = ' '.join(update.message.text.split()[1:])
-
-    #     state[chat_id]["message"].append({"role": "user", "content": message_text})
-
-    #     response = await gpt_start(state[chat_id])
-    #     await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
     
     # state returns the state object
     state_handler = CommandHandler('state', get_state)
@@ -64,9 +43,6 @@ if __name__ == '__main__':
     
     caps_handler = CommandHandler('caps', caps)
     application.add_handler(caps_handler)
-
-    history_handler = CommandHandler('history', history)
-    application.add_handler(history_handler)
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
