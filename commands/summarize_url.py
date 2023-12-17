@@ -14,13 +14,9 @@ from models.get_article import get_readable
 #       i += 3000
 
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data['state'] = {}
     chat_id = update.effective_chat.id
-    
-    if 'state' not in context.user_data:
-        context.user_data['state'] = {}
-
-    if chat_id not in context.user_data['state']:
-        context.user_data['state'][chat_id] = {"message": []}
+    context.user_data['state'][chat_id] = {"message": []}
 
     # clear user_data
     # add the following data to the user
