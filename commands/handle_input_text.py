@@ -1,6 +1,7 @@
 from .common import Update, ContextTypes
 from commands.summarize_url import summarize_url
 from commands.summarize_youtube import summarize_youtube
+from commands.gpt import gpt_command
 import urllib.parse
 
 def is_url(string):
@@ -22,5 +23,6 @@ async def handle_input_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif (is_url(update.message.text)):
         await summarize_url(update,context)
     else:
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="No URL Recieved")
+        await gpt_command(update,context)
+        # await context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
+        # await context.bot.send_message(chat_id=update.effective_chat.id, text="No URL Recieved")

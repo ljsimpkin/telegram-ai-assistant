@@ -1,6 +1,5 @@
 from openai import OpenAI
 import os
-import argparse
 from colorama import Fore, Style
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory
@@ -8,7 +7,7 @@ from prompt_toolkit.history import InMemoryHistory
 client = OpenAI()
 
 MODEL="gpt-4-1106-preview"
-MAX_TOKENS=None
+MAX_TOKENS=500
 TEMPERATURE=1
 
 def setup_openai():
@@ -43,7 +42,7 @@ async def gpt_start(state):
     
     response = interact_with_gpt(messages=conversation)
     conversation.append({"role": "assistant", "content": response})
-    print(Fore.YELLOW + "ChatGPT: " + response)
+    print(Fore.GREEN + "ChatGPT: " + response)
     
     state["message"] = conversation
     return response

@@ -28,12 +28,11 @@ def interact_with_gpt(messages):
 def sentence_count(string):
     return len(string.split('.')) 
 
-def summarize_text(text):
-    count = sentence_count(text)
-    length = f'2 sentences' if count > 1 else "1 sentence"
+def summarize_text(input):
+    # count = sentence_count(text)
+    # length = f'2 sentences' if count > 1 else "1 sentence"
     # import pdb; pdb.set_trace()
-    CODE_FLAG= f'You are a bot that summarises the users input. Reduce it down to {length}'
-    input_messages=[{'role':'system', 'content': CODE_FLAG}, {"role": "user", "content": text}]
-    response = interact_with_gpt(input_messages)
-    # This is a placeholder implementation. We'll replace this with a call to the actual API.
+    # CODE_FLAG= f'You are a bot that summarises the users input. Reduce it down to {length}'
+    # input_messages=[{'role':'system', 'content': CODE_FLAG}, {"role": "user", "content": text}]
+    response = interact_with_gpt(input)
     return response
