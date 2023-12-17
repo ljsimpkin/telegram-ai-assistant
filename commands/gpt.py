@@ -2,6 +2,8 @@ from .common import Update, ContextTypes
 from models.gpt_conversation import gpt_start
 
 async def gpt_command(update: Update, context: ContextTypes.context):
+        message_text = update.message.text
+        
         chat_id = update.effective_chat.id
         if 'state' not in context.user_data:
             context.user_data['state'] = {}
@@ -10,7 +12,8 @@ async def gpt_command(update: Update, context: ContextTypes.context):
             context.user_data['state'][chat_id] = {"message": []}
 
         # Remove the command from the message text e.g. /gpt
-        message_text = ' '.join(update.message.text.split()[1:])
+        if update.message.text[0] == '/':
+          message_text = ' '.join(update.message.text.split()[1:])
 
         context.user_data['state'][chat_id]["message"].append({"role": "user", "content": message_text})
 
