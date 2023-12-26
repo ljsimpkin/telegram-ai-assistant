@@ -4,4 +4,4 @@ __pycache__
 output_image.jpg
 downloads/*
 .DS_Store
-./models/speech.mp3
+models/speech.mp3
