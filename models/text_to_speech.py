@@ -10,7 +10,7 @@ async def text_to_speech(text):
 	speech_file_path = Path(__file__).parent / "speech.mp3"
 	response = client.audio.speech.create(
   	model="tts-1",
-  	voice="alloy",
+  	voice="onyx",
   	input=text
 	)
 
