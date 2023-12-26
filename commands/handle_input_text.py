@@ -19,6 +19,7 @@ def is_youtube_url(string):
 
 async def handle_input_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if is_youtube_url(update.message.text):
+        await context.bot.send_message(chat_id=update.effective_chat.id, text="Summarizing Youtube")
         await summarize_youtube(update,context)
     elif (is_url(update.message.text)):
         await summarize_url(update,context)
