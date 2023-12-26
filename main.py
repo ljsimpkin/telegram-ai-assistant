@@ -14,6 +14,7 @@ from commands.summarize_url import summarize_url
 from commands.handle_input_text import handle_input_text
 from commands.gpt import gpt_command
 from commands.state import get_state
+from commands.state_clear import clear_state
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -30,6 +31,9 @@ if __name__ == '__main__':
     # state returns the state object
     state_handler = CommandHandler('state', get_state)
     application.add_handler(state_handler)
+
+    clear_state_handler = CommandHandler('clear', clear_state)
+    application.add_handler(clear_state_handler)
 
     gpt_handler = CommandHandler('gpt', gpt_command)
     application.add_handler(gpt_handler)
