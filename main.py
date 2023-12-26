@@ -1,5 +1,4 @@
 import logging
-import json
 import os
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
@@ -14,6 +13,7 @@ from commands.unknown import unknown
 from commands.summarize_url import summarize_url
 from commands.handle_input_text import handle_input_text
 from commands.gpt import gpt_command
+from commands.state import get_state
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -27,9 +27,6 @@ if not os.path.exists('downloads'):
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    async def get_state(update: Update, context: ContextTypes.context):
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=(json.dumps(context.user_data)))
-    
     # state returns the state object
     state_handler = CommandHandler('state', get_state)
     application.add_handler(state_handler)
