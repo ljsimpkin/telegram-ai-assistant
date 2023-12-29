@@ -2,9 +2,17 @@ from .common import Update, ContextTypes
 from models.summarize_gpt import summarize_text
 from models.get_article import get_readable
 
+# message back the source of the summarization
+async def send_paginated_message(chat_id, context, message):
+    i = 0
+    while i < len(message):
+      await context.bot.send_message(chat_id, text=message[i:i+3000])
+      i += 3000
+   
+
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # acknowledge message request
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Generating summary")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Generating Summary")
 
     # clear user_data state
     context.user_data['state'] = {}
@@ -18,9 +26,5 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text=summary)
 
     # message back the source of the summarization
-    i = 0
-    while i < len(page):
-      await context.bot.send_message(chat_id=update.effective_chat.id, text=page[i:i+3000])
-      i += 3000
-
+    await send_paginated_message(update.effective_chat.id, context, page)
     
