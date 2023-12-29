@@ -42,7 +42,7 @@ async def gpt_start(state):
     
     response = interact_with_gpt(messages=conversation)
     conversation.append({"role": "assistant", "content": response})
-    print(Fore.GREEN + "ChatGPT: " + response)
-    
+    # print(Fore.GREEN + "ChatGPT: " + response)
     state["message"] = conversation
+    
     return response
