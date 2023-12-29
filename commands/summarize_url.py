@@ -13,7 +13,7 @@ async def send_paginated_message(chat_id, context, message):
 def get_first_and_last_words(text):
     words = text.split()
     word_count = len(words)
-    return f'Summarized {word_count} words from "' + ' '.join(words[:3]) + ' ... ' + ' '.join(words[-3:]) +  '" /view_source'
+    return f'{word_count} words from "' + ' '.join(words[:3]) + ' ... ' + ' '.join(words[-3:]) +  '" /view_source'
 
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # acknowledge message request
