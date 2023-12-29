@@ -2,12 +2,18 @@ from .common import Update, ContextTypes
 from models.summarize_gpt import summarize_text
 from models.get_article import get_readable
 
-# message back the source of the summarization
-def get_summary_source(text):
+# send a large message
+async def send_paginated_message(chat_id, context, message):
+    i = 0
+    while i < len(message):
+      await context.bot.send_message(chat_id, text=message[i:i+3000])
+      i += 3000
+
+# return the first and last words as a string
+def get_first_and_last_words(text):
     words = text.split()
     return ' '.join(words[:3]) + ' ... ' + ' '.join(words[-3:])
    
-
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # acknowledge message request
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Generating Summary")
@@ -24,6 +30,4 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text=summary)
 
     # message back the source of the summarization
-    summary_source = get_summary_source(page)
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=summary_source)
-    
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=get_first_and_last_words(page))
