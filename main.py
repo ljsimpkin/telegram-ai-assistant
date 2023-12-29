@@ -15,6 +15,7 @@ from commands.handle_input_text import handle_input_text
 from commands.gpt import gpt_command
 from commands.state import get_state
 from commands.state_clear import clear_state
+from commands.view_source import view_source
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -56,6 +57,9 @@ if __name__ == '__main__':
 
     image_handler = CommandHandler('url', summarize_url)
     application.add_handler(image_handler)
+
+    source_handler = CommandHandler('view_source', view_source)
+    application.add_handler(source_handler)
 
     voice_message_handler = MessageHandler(filters.VOICE, voice_handler)
     application.add_handler(voice_message_handler)
