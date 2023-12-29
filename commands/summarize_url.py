@@ -4,10 +4,10 @@ from models.get_article import get_readable
 
 # message back the source of the summarization
 async def send_paginated_message(chat_id, context, message):
-    i = 0
-    while i < len(message):
-      await context.bot.send_message(chat_id, text=message[i:i+3000])
-      i += 3000
+    words = message.split()
+    first_three_words = " ".join(words[:3])
+    last_three_words = " ".join(words[-3:])
+    await context.bot.send_message(chat_id, text=f"First three words: {first_three_words}\nLast three words: {last_three_words}")
    
 
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
