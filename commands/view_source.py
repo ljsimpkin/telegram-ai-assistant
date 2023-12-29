@@ -13,7 +13,7 @@ async def view_source(update: Update, context: ContextTypes.context):
   chat_id = update.effective_chat.id
 
 
-  if hasattr(context.user_data, 'state'):
+  if 'state' in context.user_data:
       await context.bot.send_message(chat_id=update.effective_chat.id, text="URL found yeha!")
   else:
       await context.bot.send_message(chat_id=update.effective_chat.id, text="No source found. Have you summarized a url?")
