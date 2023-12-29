@@ -12,8 +12,9 @@ async def send_paginated_message(chat_id, context, message):
 # return the first and last words as a string
 def get_first_and_last_words(text):
     words = text.split()
-    return ' '.join(words[:3]) + ' ... ' + ' '.join(words[-3:])
-   
+    word_count = len(words)
+    return f'Summarized {word_count} words from "' + ' '.join(words[:3]) + ' ... ' + ' '.join(words[-3:]) +  '" /view_source'
+
 async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # acknowledge message request
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Generating Summary")
@@ -25,9 +26,7 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # send the summary
     URL = update.message.text
     page = get_readable(URL)
+    source = get_first_and_last_words(page)
     context.user_data['state'][chat_id] = {"message": [{'role':'system', 'content': 'You are a bot that summarises the users input. Reduce it down to 2 sentences'}, {"role": "user", "content": page}]}
     summary = summarize_text(context.user_data['state'][chat_id]['message'])
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=summary)
-
-    # message back the source of the summarization
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=get_first_and_last_words(page))
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=summary + "\n\n" + source)
