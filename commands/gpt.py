@@ -15,7 +15,12 @@ async def gpt_command(update: Update, context: ContextTypes.context):
         if update.message.text[0] == '/':
           message_text = ' '.join(update.message.text.split()[1:])
 
-        context.user_data['state'][chat_id]["message"].append({"role": "user", "content": message_text})
+
+        if 'mode' in context.user_data['state'][chat_id] and context.user_data['state'][chat_id]['mode'] == "article":  
+          context.user_data['state'][chat_id]["message"].append({"role": "user", "content": f'#{message_text} support your answer with quotes if a users question is answered by the article'})
+        else:
+          context.user_data['state'][chat_id]["message"].append({"role": "user", "content": message_text})
+ 
 
         response = await gpt_start(context.user_data['state'][chat_id])
         await context.bot.send_message(chat_id=update.effective_chat.id, text=response)

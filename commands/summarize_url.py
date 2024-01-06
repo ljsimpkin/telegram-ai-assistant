@@ -22,11 +22,14 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # clear user_data state
     context.user_data['state'] = {}
     chat_id = update.effective_chat.id
+    context.user_data['state'][chat_id]['mode'] = "article"
 
     # send the summary
     URL = update.message.text
     page = get_readable(URL)
     source = get_first_and_last_words(page)
-    context.user_data['state'][chat_id] = {"message": [{'role':'system', 'content': 'You are a bot that summarises the users input. Reduce it down to 2 sentences'}, {"role": "user", "content": page}]}
+    # context.user_data['state'][chat_id] = {"message": [{'role':'system', 'content': 'You are a bot that summarises the users input. Reduce it down to 2 sentences'}, {"role": "user", "content": page}]}
+    context.user_data['state'][chat_id] = {"message": [{"role": "user", "content": f'Summarise the following article in triple backticks into 2 sentences: ```#{page}```'}]}
+    context.user_data['state'][chat_id]['source'] = page
     summary = summarize_text(context.user_data['state'][chat_id]['message'])
     await context.bot.send_message(chat_id=update.effective_chat.id, text=summary + "\n\n" + source)

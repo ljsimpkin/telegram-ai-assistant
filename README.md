@@ -60,20 +60,18 @@ import pdb; pdb.set_trace()
 
 ## To Do
 
-– compile javascript
-– Allow questions to be asked about the summary?
-– display the text summarised in a collapsable section
-– record results in a database
 - summarize youtube videos [done]
 – generate audio [done]
+– transcribe audio [done]
+– Allow questions to be asked about the summary? [done]
+– display the text summarised in a collapsable section [done]
+- summarize youtube videos [done]
+– record results in a database to get feedback
+- change system command to user command to allow follow up questions to be mre than 2 sentences
+– support answer with quotes if a users question is answered by the article
 - Speed up program by skipping download audio file
-- write tests using test driven development
+- write test for view_source
 - Enable bot to be used in group chats eg to transcribe audio for users who dont like voice messages
 - Make the logger save to a file
 - Use chunking to increase audio transciprtion length greater than 30s for whisper
-- Locally run api server to have files greater than 20 mbs
-- Enable bot to be used in group chats eg to transcribe audio for users who dont like voice messages
-- Make the logger save to a file
-- Send a mark down message as response
-- summarize youtube videos
-
+- Send a mark down message as response to prettifiy the output
