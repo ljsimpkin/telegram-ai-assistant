@@ -11,10 +11,10 @@ def check_url_exists(url):
     conn.close()
     return result
 
-def insert_article(url, article, summary):
+def insert_article(chat_id, url, article, summary):
     conn = sqlite3.connect('telegram_uat.db')
     c = conn.cursor()
-    c.execute("INSERT INTO articles (url, article, summary) VALUES (?, ?, ?)", (url, article, summary))
+    c.execute("INSERT INTO articles (chat_id, url, article, summary) VALUES (?, ?, ?, ?)", (chat_id, url, article, summary))
     conn.commit()
     conn.close()
 
@@ -43,14 +43,16 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     URL = update.message.text
     existing_article = check_url_exists(URL)
     if existing_article:
-        page = existing_article[2]
-        summary = existing_article[3]
+        page = existing_article[3]
+        summary = existing_article[4]
         source = get_first_and_last_words(page)
+        context.user_data['state'][chat_id]["message"] = [{"role": "user", "content": f'Summarise the following article in triple backticks into 2 sentences: ```#{page}```'}]
+        context.user_data['state'][chat_id]['source'] = page
     else:
         page = get_readable(URL)
         source = get_first_and_last_words(page)
         context.user_data['state'][chat_id]["message"] = [{"role": "user", "content": f'Summarise the following article in triple backticks into 2 sentences: ```#{page}```'}]
         context.user_data['state'][chat_id]['source'] = page
         summary = summarize_text(context.user_data['state'][chat_id]['message'])
-        insert_article(URL, page, summary)
+        insert_article(chat_id, URL, page, summary)
     await context.bot.send_message(chat_id=update.effective_chat.id, text=summary + "\n\n" + source)
