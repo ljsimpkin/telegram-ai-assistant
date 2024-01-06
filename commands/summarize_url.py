@@ -3,6 +3,14 @@ from .common import Update, ContextTypes
 from models.summarize_gpt import summarize_text
 from models.get_article import get_readable
 
+def check_url_exists(url):
+    conn = sqlite3.connect('telegram_uat.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM articles WHERE url=?", (url,))
+    result = c.fetchone()
+    conn.close()
+    return result
+
 def insert_article(url, article, summary):
     conn = sqlite3.connect('telegram_uat.db')
     c = conn.cursor()
