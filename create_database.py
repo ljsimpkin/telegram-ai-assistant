@@ -1,5 +1,12 @@
 import sqlite3
 
+def insert_article(url, article, summary):
+    conn = sqlite3.connect('telegram_uat.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO articles (url, article, summary) VALUES (?, ?, ?)", (url, article, summary))
+    conn.commit()
+    conn.close()
+
 def create_database():
     # Connect to SQLite database (this will create the database if it does not exist)
     conn = sqlite3.connect('telegram_uat.db')
