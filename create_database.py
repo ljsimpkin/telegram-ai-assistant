@@ -19,6 +19,7 @@ def create_database():
     c.execute('''
         CREATE TABLE articles (
             id INTEGER PRIMARY KEY,
+            chat_id INTEGER,
             url TEXT,
             article TEXT,
             summary TEXT,
