@@ -10,11 +10,12 @@ def create_database():
     # Execute SQL commands to create necessary tables
     # For example, a table to store user information
     c.execute('''
-        CREATE TABLE users (
+        CREATE TABLE articles (
             id INTEGER PRIMARY KEY,
-            username TEXT,
-            first_name TEXT,
-            last_name TEXT
+            url TEXT,
+            article TEXT,
+            summary TEXT,
+            article_feedback TEXT
         )
     ''')
 
