@@ -1,4 +1,5 @@
 from .common import Update, ContextTypes
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 
 # TO DO: It would be better to have a unique view_source link that takes the user to the article in question like how a website would do when accessing a database value
 async def view_source(update: Update, context: ContextTypes.context):
@@ -10,9 +11,9 @@ async def view_source(update: Update, context: ContextTypes.context):
       while i < len(source):
         if i+3000 >= len(source):  # This is the last chunk of the source
             # Create a button
-            button = telegram.InlineKeyboardButton("Button Text", callback_data='button_data')
+            button = InlineKeyboardButton("Button Text", callback_data='button_data')
             # Create a keyboard with the button
-            keyboard = telegram.InlineKeyboardMarkup([[button]])
+            keyboard = InlineKeyboardMarkup([[button]])
             # Send the message with the keyboard
             await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000], reply_markup=keyboard)
         else:
