@@ -67,4 +67,12 @@ if __name__ == '__main__':
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
     
+    def button_callback(update: Update, context: ContextTypes.context):
+        query = update.callback_query
+        if query.data == 'button_data':  # Replace 'button_data' with the actual callback data of your button
+            print("Hello World")
+
+    button_handler = CallbackQueryHandler(button_callback)
+    application.add_handler(button_handler)
+
     application.run_polling()
