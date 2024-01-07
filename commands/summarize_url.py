@@ -35,12 +35,13 @@ async def summarize_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # acknowledge message request
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Generating Summary")
 
+    URL = update.message.text
+
     # clear user_data state
     context.user_data['state'] = {}
     chat_id = update.effective_chat.id
-    context.user_data['state'][chat_id] = {"mode": "article"}
+    context.user_data['state'][chat_id] = {"mode": "article", "url" : URL}
 
-    URL = update.message.text
     existing_article = check_url_exists(URL)
     if existing_article:
         page = existing_article[3]
