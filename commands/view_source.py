@@ -15,8 +15,8 @@ async def view_source(update: Update, context: ContextTypes.context):
             button_no = InlineKeyboardButton("No", callback_data='button_no')
             # Create a keyboard with the buttons
             keyboard = InlineKeyboardMarkup([[button_yes, button_no]])
-            # Send the message with the keyboard
-            await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000], reply_markup=keyboard)
+            # Send the message asking "Does this article look correct?" with the keyboard
+            await context.bot.send_message(chat_id=update.effective_chat.id, text="Does this article look correct?\n\n" + source[i:i+3000], reply_markup=keyboard)
         else:
             await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000])
         i += 3000
