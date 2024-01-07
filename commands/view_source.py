@@ -8,7 +8,15 @@ async def view_source(update: Update, context: ContextTypes.context):
       source = "Source: " + context.user_data['state'][chat_id]['source']
       i = 0
       while i < len(source):
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000])
+        if i+3000 >= len(source):  # This is the last chunk of the source
+            # Create a button
+            button = telegram.InlineKeyboardButton("Button Text", callback_data='button_data')
+            # Create a keyboard with the button
+            keyboard = telegram.InlineKeyboardMarkup([[button]])
+            # Send the message with the keyboard
+            await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000], reply_markup=keyboard)
+        else:
+            await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000])
         i += 3000
   else:
       await context.bot.send_message(chat_id=update.effective_chat.id, text="No source found. Have you summarized a url?")
