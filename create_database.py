@@ -7,6 +7,13 @@ def insert_article(url, article, summary):
     conn.commit()
     conn.close()
 
+def update_article_feedback(url, feedback):
+    conn = sqlite3.connect('telegram_uat.db')
+    c = conn.cursor()
+    c.execute("UPDATE articles SET article_feedback = ? WHERE url = ?", (feedback, url))
+    conn.commit()
+    conn.close()
+
 def create_database():
     # Connect to SQLite database (this will create the database if it does not exist)
     conn = sqlite3.connect('telegram_uat.db')
@@ -23,7 +30,7 @@ def create_database():
             url TEXT,
             article TEXT,
             summary TEXT,
-            article_feedback TEXT
+            article_feedback BOOLEAN
         )
     ''')
 

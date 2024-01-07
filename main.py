@@ -68,9 +68,14 @@ if __name__ == '__main__':
     application.add_handler(unknown_handler)
     
     # returns the feedback from the article scraping
+    from create_database import update_article_feedback
+
     async def button_callback(update: Update, context: ContextTypes.context):
         query = update.callback_query
         if query.data == 'button_data':  # Replace 'button_data' with the actual callback data of your button
+            chat_id = update.effective_chat.id
+            url = context.user_data['state'][chat_id]['url']
+            update_article_feedback(url, True)
             print("Hello World")
 
     button_handler = CallbackQueryHandler(button_callback)
