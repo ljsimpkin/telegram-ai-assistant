@@ -10,10 +10,11 @@ async def view_source(update: Update, context: ContextTypes.context):
       i = 0
       while i < len(source):
         if i+3000 >= len(source):  # This is the last chunk of the source
-            # Create a button
-            button = InlineKeyboardButton("Button Text", callback_data='button_data')
-            # Create a keyboard with the button
-            keyboard = InlineKeyboardMarkup([[button]])
+            # Create two buttons
+            button_yes = InlineKeyboardButton("Yes", callback_data='button_yes')
+            button_no = InlineKeyboardButton("No", callback_data='button_no')
+            # Create a keyboard with the buttons
+            keyboard = InlineKeyboardMarkup([[button_yes, button_no]])
             # Send the message with the keyboard
             await context.bot.send_message(chat_id=update.effective_chat.id, text=source[i:i+3000], reply_markup=keyboard)
         else:

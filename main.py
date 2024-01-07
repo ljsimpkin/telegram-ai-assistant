@@ -72,11 +72,14 @@ if __name__ == '__main__':
 
     async def button_callback(update: Update, context: ContextTypes.context):
         query = update.callback_query
-        if query.data == 'button_data':  # Replace 'button_data' with the actual callback data of your button
-            chat_id = update.effective_chat.id
-            url = context.user_data['state'][chat_id]['url']
+        chat_id = update.effective_chat.id
+        url = context.user_data['state'][chat_id]['url']
+        if query.data == 'button_yes':
             update_article_feedback(url, True)
-            print("Hello World")
+            print("User clicked Yes")
+        elif query.data == 'button_no':
+            update_article_feedback(url, False)
+            print("User clicked No")
 
     button_handler = CallbackQueryHandler(button_callback)
     application.add_handler(button_handler)
