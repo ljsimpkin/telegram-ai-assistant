@@ -1,7 +1,7 @@
 import logging
 import os
 from telegram import Update
-from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes, CallbackQueryHandler
 from env import TELEGRAM_TOKEN
 from commands.start import start
 from commands.image import image
@@ -67,7 +67,8 @@ if __name__ == '__main__':
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
     
-    def button_callback(update: Update, context: ContextTypes.context):
+    # returns the feedback from the article scraping
+    async def button_callback(update: Update, context: ContextTypes.context):
         query = update.callback_query
         if query.data == 'button_data':  # Replace 'button_data' with the actual callback data of your button
             print("Hello World")
