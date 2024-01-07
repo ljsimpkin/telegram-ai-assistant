@@ -76,9 +76,11 @@ if __name__ == '__main__':
         url = context.user_data['state'][chat_id]['url']
         if query.data == 'button_yes':
             update_article_feedback(url, True)
+            await context.bot.send_message(chat_id=update.effective_chat.id, text="Thanks for the feedback")
             print("User clicked Yes")
         elif query.data == 'button_no':
             update_article_feedback(url, False)
+            await context.bot.send_message(chat_id=update.effective_chat.id, text="Thanks for the feedback")
             print("User clicked No")
 
     button_handler = CallbackQueryHandler(button_callback)
